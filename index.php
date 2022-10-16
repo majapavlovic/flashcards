@@ -1,3 +1,35 @@
+<?php
+
+require "database.php";
+require "model/user.php";
+
+session_start();
+if(isset($_POST['username']) && isset($_POST['password'])) {
+    $uname = $_POST['username'];
+    $upass = $_POST['password'];
+   
+
+    $user = new User(null, $uname, $upass);
+    $response = User::logIn($user, $conn);
+    $row=mysqli_fetch_array($response);
+
+    if($response->num_rows==1) {
+        echo '<script>
+        console.log("Login success");
+    </script>';
+    $user->id=$row[0];
+    $_SESSION['user_id'] = $user->id;  
+
+    header('Location: home.php');
+    exit();
+    }else {
+        echo '<script language="javascript">
+        console.log("Login fail");
+    </script>';
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
