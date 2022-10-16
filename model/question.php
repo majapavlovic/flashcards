@@ -16,5 +16,11 @@ class Question{
         $this->category = $category;
     }
 
+    public static function selectAll() {
+        $dbconn = new Database("learnit");
+        $dbconn->select("questions", "*", null, null, null, null);
+        return $dbconn->getResult();
+    }
+
 }
 ?>
