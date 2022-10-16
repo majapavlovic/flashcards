@@ -12,11 +12,11 @@ class User{
         $this->password = $password;
     }
 
-    public static function logIn($user, mysqli $conn)
-    {
-        $query = "SELECT * FROM users WHERE username='$user->username' and password='$user->password'";
-        return $conn->query($query);
-        // TODO: iskoristiti prepare statement da se izbegne SQLinjection
+    public static function logIn($user) {
+        $dbconn = new Database("learnit");
+        $dbconn->select("users", "*", null, null, null, "username='$user->username' and password='$user->password'", null);
+        return $dbconn->getResult();
+
     }
 }
 ?>

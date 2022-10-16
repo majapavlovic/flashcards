@@ -10,7 +10,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
    
 
     $user = new User(null, $uname, $upass);
-    $response = User::logIn($user, $conn);
+    $response = User::logIn($user);
     $row=mysqli_fetch_array($response);
 
     if($response->num_rows==1) {
