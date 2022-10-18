@@ -11,5 +11,11 @@ class Category{
         $this->category_name = $category_name;
         $this->insert_date = $insert_date;
     }
+
+    public static function selectAll() {
+        $dbconn = new Database("learnit");
+        $dbconn->select("categories", "*", null, null, null, null);
+        return $dbconn->getResult();
+    }
 }
 ?>
