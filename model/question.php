@@ -22,8 +22,28 @@ class Question{
         return $dbconn->getResult();
     }
 
+    public static function getById($questionId) {
+        $dbconn = new Database("learnit");
+        $dbconn->select("questions","id, question, answer, insert_date, category_id", null, null, null, "id=$questionId");
+        $msqlObj = $dbconn->getResult();
+        while($red = $msqlObj->fetch_array(1)){
+            $myObj[]= $red;
+        }
+        return $myObj;
+    }
+
     public static function getColumns() {
         return "question, answer, insert_date, category_id";
+    }
+
+    public static function getColumnsArray() {
+        $columns = array();
+        $columns[] = "question";
+        $columns[] = "answer";
+        $columns[] = "insert_date";
+        $columns[] = "category_id";
+
+        return $columns;
     }
 
     public function getValues() {

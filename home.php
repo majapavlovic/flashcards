@@ -39,10 +39,10 @@ else {
     <div class="col-md-2">
       <div class="btn-group-vertical">
         <div class="btn-group">
-          <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#modal-insert">Add a question</button>
+          <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#questions-modal" data-bs-whatever="insert">Add a question</button>
         </div>
         <div class="btn-group">
-          <button type="button" class="btn btn-secondary btn-lg">Edit a question</button>
+          <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#questions-modal" data-bs-whatever="update">Update a question</button>
         </div>
         <div class="btn-group">
           <button type="button" class="btn btn-secondary btn-lg" id="btn-delete">Delete a question</button>
@@ -50,7 +50,6 @@ else {
       </div>
     </div>
     <div class="col">
-
       <div class="accordion" id="accordionExample">
         <?php while($row = $result->fetch_array()) : ?>
         <div class="accordion-item">
@@ -79,33 +78,35 @@ else {
   $categories_list = Category::selectAll();
   ?>
   
-  <!-- Insert Q&A Modal -->
-  <div class="modal fade" id="modal-insert" role="dialog" >
+  <!-- Insert/Update Q&A Modal -->
+  <div class="modal fade" id="questions-modal" role="dialog" >
     <div class="modal-dialog">
       <!--Sadrzaj modala-->
       <div class="modal-content" >
         <div class="modal-header">
-          <h3 style="color: black; text-align: center" >Insert Question&Answer</h3>
+          <h3 style="color: black; text-align: center" class="modal-title">Insert Question&Answer</h3>
         </div>
         <div class="modal-body">
-          <form action="#" method="post" id="insert-question">
+          <form action="#" method="post" id="question-form">
             <div class="row">
               <div class="col-md-11 ">
                 <div class="form-group">
+                  <input type="hidden" name="type_of_action" value="" class="form-control">
+                  <input type="hidden" name="question_id" value="" class="form-control">
                   <label for="question">Question</label>
-                  <textarea class="form-control" style="border: 1px solid black" name="question" rows="3"></textarea>
+                  <textarea class="form-control" style="border: 1px solid black" name="question" id="question" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="answer">Answer</label>
-                  <textarea class="form-control" style="border: 1px solid black" name="answer" rows="3"></textarea>
+                  <textarea class="form-control" style="border: 1px solid black" name="answer" id="answer" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="category">Category</label>                                    
-                  <select class="form-select" name="category_name">
+                  <select class="form-select" name="category_id" id = "category_id">
                     <?php if($categories_list->num_rows==0) { ?>
                       <option selected>Error loading categories</option>
                     <?php } else { ?>
-                      <option selected>Choose category</option>
+                      <option value="0" selected>Choose category</option>
                       <?php while($row = $categories_list-> fetch_array()) : ?>
                         <option value="<?php echo $row["id"]?>"><?php echo $row["category_name"]?></option>
                       <?php endwhile;

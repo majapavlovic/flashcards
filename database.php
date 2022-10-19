@@ -34,7 +34,7 @@
                 if($where != null)  
                     $q .= ' WHERE '.$where;  
                 if($order != null)  
-                    $q .= ' ORDER BY '.$order; 					
+                    $q .= ' ORDER BY '.$order; 
             $this->ExecuteQuery($q);
         }
 
@@ -54,7 +54,7 @@
         function update ($table, $id, $keys, $values){
             $set_query = array();
             for ($i=0; $i<sizeof($keys);$i++){
-                $set_query[] = $keys[$i] . " = '".$values[$i]."'";
+                $set_query[] = $keys[$i] . " = ".$values[$i]."";
             }
             $set_query_string = implode(',',$set_query);
             $update = "UPDATE ".$table." SET ". $set_query_string ." WHERE id=". $id;
