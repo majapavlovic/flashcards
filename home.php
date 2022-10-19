@@ -45,7 +45,7 @@ else {
           <button type="button" class="btn btn-secondary btn-lg">Edit a question</button>
         </div>
         <div class="btn-group">
-          <button type="button" class="btn btn-secondary btn-lg">Delete a question</button>
+          <button type="button" class="btn btn-secondary btn-lg" id="btn-delete">Delete a question</button>
         </div>
       </div>
     </div>

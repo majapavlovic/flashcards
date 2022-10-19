@@ -63,8 +63,8 @@
             else return false;
         }
 
-        function delete ($table,  $keys, $values) {
-            $delete = "DELETE FROM ".$table." WHERE ".$keys[0]." = '".$values[0]."'";
+        function delete ($table,  $key, $value) {
+            $delete = "DELETE FROM ".$table." WHERE ".$key." = ".$value."";
             if ($this->ExecuteQuery($delete))
             return true;
             else return false;

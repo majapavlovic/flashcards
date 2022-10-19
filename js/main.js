@@ -33,7 +33,32 @@ $("#insert-question").submit(function(){
     req.fail(function(jqXHR, textStatus, errorThrown){
         console.error('Error: '+textStatus, errorThrown)
     });
+});
 
+$('#btn-delete').click(function() {
+    var id = $('input[name="checked-donut"]:checked').val();
 
+    req = $.ajax({
+        url: 'system-operations/delete.php',
+        type:'post',
+        data: {'id':id}
+    });
+
+    req.done(function(res, textStatus, jqXHR){
+        if(res=="Success"){
+            alert("Successfully deleted question!");
+            console.log("Deleted question");
+            location.reload(true);
+        }else {
+            console.log("Failed deleting question "+res);
+            alert("Failed deleting question");
+        }
+        console.log(res);
+
+    });
+
+    req.fail(function(jqXHR, textStatus, errorThrown){
+        console.error('Error: '+textStatus, errorThrown)
+    });
 
 });
