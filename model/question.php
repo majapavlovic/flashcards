@@ -22,5 +22,19 @@ class Question{
         return $dbconn->getResult();
     }
 
+    public static function getColumns() {
+        return "question, answer, insert_date, category_id";
+    }
+
+    public function getValues() {
+        $values = array();
+        $values[]="'$this->question'";
+        $values[]="'$this->answer'";  
+        $date = date_format($this->insert_date,'Y-m-d H:i:s');
+        $values[]= "'$date'";
+        $values[]=$this->category;
+        return $values;
+    }
+
 }
 ?>
