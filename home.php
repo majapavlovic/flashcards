@@ -51,6 +51,7 @@ else {
     </div>
     <div class="col">
       <div class="accordion" id="accordionExample">
+        <input type="search" id="search-filter" placeholder="Search">
         <?php while($row = $result->fetch_array()) : ?>
         <div class="accordion-item">
           <h2 class="accordion-header" id="question_<?php echo $row["id"] ?>">

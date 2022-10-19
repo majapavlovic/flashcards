@@ -108,3 +108,25 @@ $('#btn-delete').click(function() {
     });
 
 });
+
+
+//filtering questions
+$(document).ready(function(){
+    $("#search-filter").on("keyup", function() {
+      
+       var unicode = event.charCode ? event.charCode : event.keyCode;
+          if (unicode == 27) { $(this).val(""); }
+          var searchKey = $(this).val().toLowerCase();
+          $('.accordion-button').each(function() {
+              var cellText = $(this).text().toLowerCase();
+      
+              if (cellText.indexOf(searchKey) >= 0) {
+                  $(this).parent().parent().show();
+              } else {
+                  $(this).parent().parent().hide();
+                   $('.panel-collapse.in').collapse('hide');
+              }
+          });
+          
+    });
+  });
