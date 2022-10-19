@@ -34,6 +34,10 @@ else {
 </head>
 <body>
   <div style="color: black;" class="mt-4 p-5 bg-primary text-white rounded"><h1>LearnIT Flashcards</h1></div> 
+  
+  <?php 
+  $categories_list = Category::selectAll();
+  ?>
 
   <div class="row">
     <div class="col-md-2">
@@ -47,14 +51,22 @@ else {
         <div class="btn-group">
           <button type="button" class="btn btn-secondary btn-lg" id="btn-delete">Delete a question</button>
         </div>
+        <div class="btn btn-secondary btn-lg" role="group" id="radio-questions">
+          <?php while($row = $categories_list-> fetch_array()) : ?>
+            <input type="radio" name="checked-category" value="<?php echo $row["id"]?>">
+            <label for="<?php echo $row["id"]?>"><?php echo $row["category_name"]?></label><br>
+          <?php endwhile; 
+          mysqli_data_seek($categories_list,0);?>
+        </div>
       </div>
     </div>
     <div class="col">
       <div class="accordion" id="accordionExample">
-        <input type="search" id="search-filter" placeholder="Search">
+        <input type="search" id="search-filter" placeholder="Search" class="form-control">
         <?php while($row = $result->fetch_array()) : ?>
         <div class="accordion-item">
           <h2 class="accordion-header" id="question_<?php echo $row["id"] ?>">
+          <input type="hidden" class="accordion_category_id" value="<?php echo $row["category_id"] ?>" class="form-control">
             <button class="accordion-button" style="font-size:xx-large;" type="button" data-bs-toggle="collapse" data-bs-target="#answer_<?php echo $row["id"] ?>" aria-expanded="false" aria-controls="collapseOne">
             <div class="custom-radio-btn" id="radio-questions">
               <input type="radio" name="checked-donut" value=<?php echo $row["id"] ?>>
@@ -74,10 +86,6 @@ else {
       </div>
     </div>
   </div>
-
-  <?php 
-  $categories_list = Category::selectAll();
-  ?>
   
   <!-- Insert/Update Q&A Modal -->
   <div class="modal fade" id="questions-modal" role="dialog" >

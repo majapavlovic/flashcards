@@ -126,7 +126,20 @@ $(document).ready(function(){
                   $(this).parent().parent().hide();
                    $('.panel-collapse.in').collapse('hide');
               }
-          });
-          
+          });     
     });
   });
+
+$("#radio-questions").on("change", function() {
+    var id = $('input[name="checked-category"]:checked').val();
+      $('.accordion-button').each(function() {
+          var question_id = $(this).siblings('.accordion_category_id').val();
+
+          if (question_id == id) {
+              $(this).parent().parent().show();
+          } else {
+              $(this).parent().parent().hide();
+               $('.panel-collapse.in').collapse('hide');
+          }
+      });     
+});
